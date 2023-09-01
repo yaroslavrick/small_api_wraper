@@ -4,7 +4,7 @@
 
 Make sure you have the following installed on your system:
 
-- Ruby version 3.2.2
+- Ruby version 3.1.2
 - Bundler
 
 ## Installation

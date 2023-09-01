@@ -1,0 +1,64 @@
+<div class="container">
+  <h1>Find Your Activity for Today</h1>
+  <div>
+    <%= form_with url: "/api_wrapper", method: :get, class: 'form-inline' do |form| %>
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :type, "Activity type:", class: 'mr-2' %>
+        <%= form.select :type, @activity_types, { :include_blank => true }, { class: "form-control mr-2" } %>
+      </div>
+
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :participants, "Number of participants:", class: 'mr-2' %>
+        <%= form.number_field :participants, placeholder: "number of participants", step: 1, class: "form-control mr-2" %>
+      </div>
+
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :minprice, "Minimum price:", class: 'mr-2' %>
+        <%= form.number_field :minprice, placeholder: "minimum price", step: 0.1, class: "form-control mr-2" %>
+      </div>
+
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :maxprice, "Maximum price:", class: 'mr-2' %>
+        <%= form.number_field :maxprice, placeholder: "maximum price", step: 0.1, class: "form-control mr-2" %>
+      </div>
+
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :minaccessibility, "Minimum accessibility:", class: 'mr-2' %>
+        <%= form.number_field :minaccessibility, placeholder: "minimum accessibility", step: 0.1, class: "form-control mr-2" %>
+      </div>
+
+      <div class="form-group mt-2 mb-2">
+        <%= form.label :maxaccessibility, "Maximum accessibility:", class: 'mr-2' %>
+        <%= form.number_field :maxaccessibility, placeholder: "maximum accessibility", step: 0.1, class: "form-control mr-2" %>
+      </div>
+
+      <%= form.submit "Search", class: "btn btn-primary mt-2 mb-2" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Activity details:</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Activity</th>
+        <th>Type</th>
+        <th>Participants</th>
+        <th>Price</th>
+        <th>Link</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @activity["activity"] %></td>
+        <td><%= @activity["type"] %></td>
+        <td><%= @activity["participants"] %></td>
+        <td><%= @activity["price"] %></td>
+        <td><%= link_to @activity["link"], @activity["link"], target: "_blank" %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to 'View Activity History', latest_activities_path, class: 'btn btn-primary mt-2 mb-2' %>
+</div>
