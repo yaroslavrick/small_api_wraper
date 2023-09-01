@@ -1,0 +1,10 @@
+ignore_unused_routes:
+  - ^active_storage*
+  - rails/conductor/action_mailbox/inbound_emails#update
+  - rails/conductor/action_mailbox/inbound_emails#destroy
+  - rails/conductor/action_mailbox/inbound_emails#new
+  - rails/conductor/action_mailbox/inbound_emails#edit
+
+ignore_unreachable_actions:
+  - ^active_storage*
+  - rails/conductor/action_mailbox/inbound_emails#new
