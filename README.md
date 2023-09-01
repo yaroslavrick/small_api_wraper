@@ -12,7 +12,7 @@ Make sure you have the following installed on your system:
 1. Clone the repository:
 
 ```bash
-git clone https://..
+git clone git@github.com:yaroslavrick/small_api_wraper.git
 ```
 
 2. Move into the project directory:
