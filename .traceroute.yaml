@@ -1,0 +1,19 @@
+ignore_unused_routes:
+  - ^active_storage*
+  - rails/conductor/action_mailbox/inbound_emails#update
+  - rails/conductor/action_mailbox/inbound_emails#destroy
+  - qa/users#destroy
+  - active_admin*
+  - admin*
+  - api/v1/friend_requests*
+ignore_unreachable_actions:
+  - ^active_storage*
+  - rails/conductor/action_mailbox/inbound_emails#new
+  - ^*request_method
+  - ^*request_cookies
+  - ^*request_headers
+  - qa*
+  - inherited_resources*
+  - active_admin*
+  - devise*
+  - admin*
