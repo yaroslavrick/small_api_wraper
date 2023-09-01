@@ -1,0 +1,120 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-i18n
+  - rubocop-rspec
+  - rubocop-factory_bot
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+
+Lint/MissingSuper:
+  Enabled: false
+
+I18n/GetText/DecorateFunctionMessage:
+  Enabled: false
+
+# Style -----------------------------------------------------------------------
+
+Style/Documentation:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+RSpec/VariableName:
+  Exclude:
+    - spec/requests/api/v1/**/*
+
+Rails/DeprecatedActiveModelErrorsMethods:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
+Style/NumericLiterals:
+  Exclude:
+    - config/initializers/strong_migrations.rb
+# Layout ----------------------------------------------------------------------
+
+Layout/LineLength:
+  Max: 120
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    association:
+      - has_one
+      - has_many
+    attribute_macros:
+      - attr_accessor
+      - attr_reader
+      - attr_writer
+    macros:
+      - validates
+      - validate
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - association
+    - public_attribute_macros
+    - public_delegate
+    - macros
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_attribute_macros
+    - protected_methods
+    - private_attribute_macros
+    - private_delegate
+    - private_methods
+
+# rubocop-rspec ----------------------------------------------------------------------
+RSpec/ExampleLength:
+  Max: 30
+RSpec/MultipleExpectations:
+  Max: 15
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+  Exclude:
+    - spec/requests/**/*
+RSpec/NestedGroups:
+  Max: 5
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - spec/requests/**/*
+RSpec/ScatteredSetup:
+  Exclude:
+    - spec/requests/**/*
+RSpec/IndexedLet:
+  Exclude:
+    - spec/interactors/**/*
+    - spec/queries/**/*
+Rails/SkipsModelValidations:
+  AllowedMethods: ["update_all"]

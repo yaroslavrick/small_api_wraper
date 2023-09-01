@@ -1,0 +1,23 @@
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      tags: check code style
+      glob: '*.rb'
+      run: bundle exec rubocop --config .rubocop.yml --force-exclusion {staged_files}
+    brakeman:
+      tags: check security vulnerabilities
+      glob: '*.rb'
+      run: bundle exec brakeman --no-pager --only-files {staged_files} --force
+pre-push:
+  parallel: true
+  commands:
+    traceroute:
+      tags: check unused routes, methods, etc
+      run: FAIL_ON_ERROR=1 rake traceroute
+    bundler-audit:
+      tags: patch-level verification
+      run: bundle exec bundler-audit check --update --ignore CVE-2023-38337
+    bundler-leak:
+      tags: check dependencies security
+      run: bundle exec bundler-leak check --update
