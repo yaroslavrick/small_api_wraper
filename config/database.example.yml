@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  port: <%= ENV["POSTGRES_PORT"] %>
+  username: <%= ENV["POSTGRES_USERNAME"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: small_api_wrapper_development
+
+test:
+  <<: *default
+  database: small_api_wrapper_test
+
+production:
+  <<: *default
+  database: small_api_wrapper_production
+  username: small_api_wrapper
+  password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
