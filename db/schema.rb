@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_123856) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
+    t.string "activity"
     t.string "activity_type"
     t.integer "participants"
     t.float "price"
