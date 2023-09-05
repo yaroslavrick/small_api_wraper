@@ -16,18 +16,21 @@ class MyProgram < Thor
   option :maxaccessibility
 
   def new
-    params = options.transform_keys(&:to_s)
-    result = ApiWrapper::Index::Organizer.call(params_to_validate: params)
-    if result.success?
-      console_print(result)
-    else
-      puts "Error: #{result.errors}"
-    end
+    result = ApiWrapper::Index::Organizer.call(params_to_validate: options.transform_keys(&:to_s))
+    result.success? ? new_print(result) : puts("Error: #{result.errors}")
+  end
+
+  desc 'list', 'List latest activities'
+
+  def list
+    result = ApiWrapper::LatestActivities::Organizer.call(latest_activities_params: { 'order' => 'desc',
+                                                                                      'sort' => 'created_at' })
+    result.success? ? list_print(result.activities.first(5)) : puts("Error: #{result.errors}")
   end
 
   private
 
-  def console_print(result)
+  def new_print(result)
     pastel = Pastel.new
     headers = colorized_headers(pastel)
     rows = colorized_rows(pastel, result.activity)
@@ -35,6 +38,15 @@ class MyProgram < Thor
     table = TTY::Table.new headers, rows
     puts table.render(:ascii, padding: [0, 1, 0, 1])
     puts pastel.yellow("\nActivity saved to database")
+  end
+
+  def list_print(activities)
+    pastel = Pastel.new
+    headers = colorized_headers(pastel)
+    rows = activities.map { |activity| colorized_rows_from_model(pastel, activity) }
+
+    table = TTY::Table.new headers, rows
+    puts table.render(:ascii, padding: [0, 1, 0, 1])
   end
 
   def colorized_headers(pastel)
@@ -45,6 +57,18 @@ class MyProgram < Thor
     row_data = activity.keys
     row = row_data.map { |key| pastel.green(activity[key]) }
     [row]
+  end
+
+  def colorized_rows_from_model(pastel, activity)
+    [
+      pastel.green(activity.activity),
+      pastel.green(activity.activity_type),
+      pastel.green(activity.participants),
+      pastel.green(activity.price),
+      pastel.green(activity.link),
+      pastel.green(activity.key),
+      pastel.green(activity.accessibility)
+    ]
   end
 end
 

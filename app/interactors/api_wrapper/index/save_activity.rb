@@ -16,7 +16,8 @@ module ApiWrapper
 
       def save_record!
         model.create!(
-          activity_type: activity['activity'],
+          activity: activity['activity'],
+          activity_type: activity['type'],
           participants: activity['participants'],
           price: activity['price'],
           link: activity['link'],

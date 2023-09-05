@@ -6,7 +6,7 @@ module ApiWrapper
       DEFAULT_SORT = 'created_at'
       DEFAULT_DIRECTION = 'desc'
 
-      attr_reader :sort, :order, :scope
+      attr_reader :scope
 
       def initialize(params, scope)
         @sort = params[:sort] || DEFAULT_SORT
@@ -15,7 +15,7 @@ module ApiWrapper
       end
 
       def call
-        scope.order(Arel.sql("#{sort} #{order}"))
+        scope.order(Arel.sql("#{@sort} #{@order}"))
       end
     end
   end

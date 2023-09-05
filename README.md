@@ -76,7 +76,11 @@ Once the server is running, open your web browser and go to <http://localhost:30
 #### To run console app:
 
 ```zsh
-ruby my_program new --type education --participants 1 --price_min 0.1 --price_max 30 --accessibility_min 0.1 --accessibility_max 0.5
+ruby my_program.rb new --type education --participants 1 --price_min 0.1 --price_max 30 --accessibility_min 0.1 --accessibility_max 0.5
+```
+
+```zsh
+ruby my_program.rb list
 ```
 
 Make sure you have local server running to have console app working.
