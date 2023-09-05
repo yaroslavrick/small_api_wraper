@@ -19,7 +19,6 @@ gem 'jsbundling-rails', '~> 1.1.2'
 gem 'pagy', '~> 6.0.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'pundit', '~> 2.3.0'
 gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
 gem 'sprockets-rails'
 gem 'strong_migrations', '~> 1.6.0'
@@ -56,5 +55,3 @@ group :test do
   gem 'rspec-rails', '~> 6.0.2'
   gem 'shoulda-matchers', '~> 5.3.0'
 end
-
-gem 'cli-ui', '~> 2.2'
