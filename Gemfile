@@ -10,20 +10,23 @@ gem 'cssbundling-rails', '~> 1.2.0'
 gem 'dotenv-rails', '~> 2.8.1'
 gem 'dry-validation', '~> 1.10.0'
 gem 'faraday', '~> 2.7.10'
+gem 'hamlit', '~> 3.0'
+gem 'hamlit-rails', '~> 0.2.3'
+gem 'html2haml', '~> 2.3'
 gem 'interactor-rails', '~> 2.2.1'
 gem 'jbuilder', '~> 2.11.5'
 gem 'jsbundling-rails', '~> 1.1.2'
 gem 'pagy', '~> 6.0.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'pundit', '~> 2.3.0'
 gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
 gem 'sprockets-rails'
 gem 'strong_migrations', '~> 1.6.0'
+gem 'thor', '~> 1.2'
+gem 'tty-table', '~> 0.12.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'bullet', '~> 7.0.7'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dockerfile-rails', '>= 1.4.1'
@@ -52,8 +55,3 @@ group :test do
   gem 'rspec-rails', '~> 6.0.2'
   gem 'shoulda-matchers', '~> 5.3.0'
 end
-
-gem "hamlit", "~> 3.0"
-gem "hamlit-rails", "~> 0.2.3"
-
-gem "html2haml", "~> 2.3"
