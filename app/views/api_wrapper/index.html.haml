@@ -1,0 +1,42 @@
+.container
+  %h1 Find Your Activity for Today
+  %div
+    = form_with url: "/api_wrapper", method: :get, class: 'form-inline' do |form|
+      .form-group.mt-2.mb-2
+        = form.label :type, "Activity type:", class: 'mr-2'
+        = form.select :type, %w[education recreational social diy charity cooking relaxation music busywork], { :include_blank => true }, { class: "form-control mr-2" }
+      .form-group.mt-2.mb-2
+        = form.label :participants, "Number of participants:", class: 'mr-2'
+        = form.number_field :participants, placeholder: "1-8", step: 1, class: "form-control mr-2"
+      .form-group.mt-2.mb-2
+        = form.label :minprice, "Minimum price:", class: 'mr-2'
+        = form.number_field :minprice, placeholder: "0-0.8", step: 0.1, class: "form-control mr-2"
+      .form-group.mt-2.mb-2
+        = form.label :maxprice, "Maximum price:", class: 'mr-2'
+        = form.number_field :maxprice, placeholder: "0-0.9", step: 0.1, class: "form-control mr-2"
+      .form-group.mt-2.mb-2
+        = form.label :minaccessibility, "Minimum accessibility:", class: 'mr-2'
+        = form.number_field :minaccessibility, placeholder: "0-0.9", step: 0.1, class: "form-control mr-2"
+      .form-group.mt-2.mb-2
+        = form.label :maxaccessibility, "Maximum accessibility:", class: 'mr-2'
+        = form.number_field :maxaccessibility, placeholder: "0-0.9", step: 0.1, class: "form-control mr-2"
+      = form.submit "Search", class: "btn btn-primary mt-2 mb-2"
+  - if @activity.present?
+    %div
+      %h2 Activity details:
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Activity
+            %th Type
+            %th Participants
+            %th Price
+            %th Link
+        %tbody
+          %tr
+            %td= @activity["activity"]
+            %td= @activity["type"]
+            %td= @activity["participants"]
+            %td= @activity["price"]
+            %td= link_to @activity["link"], @activity["link"], target: "_blank"
+  = link_to 'View Activity History', latest_activities_path, class: 'btn btn-primary mt-2 mb-2'

@@ -52,3 +52,8 @@ group :test do
   gem 'rspec-rails', '~> 6.0.2'
   gem 'shoulda-matchers', '~> 5.3.0'
 end
+
+gem "hamlit", "~> 3.0"
+gem "hamlit-rails", "~> 0.2.3"
+
+gem "html2haml", "~> 2.3"
