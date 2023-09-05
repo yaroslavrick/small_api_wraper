@@ -1,0 +1,11 @@
+- if notice.present?
+  .alert.alert-success{:role => "alert"}
+    = notice
+- if alert.present?
+  .alert.alert-danger{:role => "alert"}
+    - if alert.is_a?(Dry::Validation::MessageSet)
+      %ul
+        - alert.each do |error|
+          %li= "#{error.path.join(' ') } #{error.text}"
+    - else
+      = alert
