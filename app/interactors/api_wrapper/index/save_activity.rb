@@ -3,17 +3,30 @@
 module ApiWrapper
   module Index
     class SaveActivity < BaseInteractor
-      delegate :activity, to: :context
+      delegate :activity, :model, to: :context
 
       def call
-        Activity.create!(
-          activity_type: activity['type'],
+        save_record!
+        context.semantic_status = 201
+      rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid => e
+        handle_error(e.message)
+      end
+
+      private
+
+      def save_record!
+        model.create!(
+          activity_type: activity['activity'],
           participants: activity['participants'],
           price: activity['price'],
           link: activity['link'],
           key: activity['key'],
           accessibility: activity['accessibility']
         )
+      end
+
+      def handle_error(errors)
+        context.fail!(errors:, semantic_status: 422)
       end
     end
   end

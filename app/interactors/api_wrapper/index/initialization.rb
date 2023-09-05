@@ -4,7 +4,8 @@ module ApiWrapper
   module Index
     class Initialization < BaseInteractor
       def call
-        context.activity_types = %w[education recreational social diy charity cooking relaxation music busywork]
+        context.validator_class = ApiWrapper::IndexValidator
+        context.model = Activity
       end
     end
   end

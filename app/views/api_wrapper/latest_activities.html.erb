@@ -4,11 +4,11 @@
   <%= form_with url: latest_activities_path, method: :get, class: 'form-inline mb-3' do |form| %>
     <div class="form-group mt-2 mb-2">
       <%= form.label :sort, "Sort By:", class: 'mr-2' %>
-      <%= form.select :sort, %w[activity_type participants price created_at accessibility], {}, { class: "form-control mr-2" } %>
+      <%= form.select :sort, %w[activity_type participants price created_at accessibility], {selected: params[:sort]}, { class: "form-control mr-2" } %>
     </div>
     <div class="form-group mt-2 mb-2">
       <%= form.label :order, "Order:", class: 'mr-2' %>
-      <%= form.select :order, %w[asc desc], {}, { class: "form-control mr-2" } %>
+      <%= form.select :order, %w[asc desc], {selected: params[:order]}, { class: "form-control mr-2" } %>
     </div>
     <%= form.submit "Apply", class: "btn btn-primary mt-2 mb-2" %>
   <% end %>

@@ -3,11 +3,8 @@
 module ApiWrapper
   module LatestActivities
     class Initialization < BaseInteractor
-      DEFAULT_SORT = 'created_at'
-      DEFAULT_DIRECTION = 'desc'
       def call
-        context.sort = context.latest_activities_params[:sort] || DEFAULT_SORT
-        context.order = context.latest_activities_params[:order] || DEFAULT_DIRECTION
+        context.query_object_class = ApiWrapper::LatestActivities::SortQuery
         context.model = Activity
       end
     end

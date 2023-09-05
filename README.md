@@ -68,7 +68,7 @@ bundle exec rails db:seed
 To start the app, run the following command:
 
 ```bash
-bundle exec rails server
+bin/dev
 ```
 
 Once the server is running, open your web browser and go to <http://localhost:3000> to access the app.
