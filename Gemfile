@@ -5,13 +5,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-gem 'bootsnap', require: false
-gem 'cssbundling-rails'
+gem 'bootsnap', '~> 1.16', require: false
+gem 'cssbundling-rails', '~> 1.2.0'
 gem 'dotenv-rails', '~> 2.8.1'
 gem 'dry-validation', '~> 1.10.0'
+gem 'faraday', '~> 2.7.10'
 gem 'interactor-rails', '~> 2.2.1'
-gem 'jbuilder'
-gem 'jsbundling-rails'
+gem 'jbuilder', '~> 2.11.5'
+gem 'jsbundling-rails', '~> 1.1.2'
+gem 'pagy', '~> 6.0.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.3.0'

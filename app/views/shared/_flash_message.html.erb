@@ -1,0 +1,19 @@
+<% if notice.present? %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert.present? %>
+  <div class="alert alert-danger" role="alert">
+    <% if alert.is_a?(Dry::Validation::MessageSet) %>
+      <ul>
+        <% alert.each do |error| %>
+          <li><%= "#{error.path.join(' ') } #{error.text}" %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <%= alert %>
+    <% end %>
+  </div>
+<% end %>
