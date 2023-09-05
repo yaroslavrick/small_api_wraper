@@ -16,25 +16,16 @@ class MyProgram < Thor
   option :maxaccessibility
 
   def new
-    params = options.transform_keys(&:to_s)
-    result = ApiWrapper::Index::Organizer.call(params_to_validate: params)
-    if result.success?
-      new_print(result)
-    else
-      puts "Error: #{result.errors}"
-    end
+    result = ApiWrapper::Index::Organizer.call(params_to_validate: options.transform_keys(&:to_s))
+    result.success? ? new_print(result) : puts("Error: #{result.errors}")
   end
 
   desc 'list', 'List latest activities'
 
   def list
-    params = {}
-    result = ApiWrapper::LatestActivities::Organizer.call(latest_activities_params: params)
-    if result.success?
-      list_print(result.activities)
-    else
-      puts "Error: #{result.errors}"
-    end
+    result = ApiWrapper::LatestActivities::Organizer.call(latest_activities_params: { 'order' => 'desc',
+                                                                                      'sort' => 'created_at' })
+    result.success? ? list_print(result.activities.first(5)) : puts("Error: #{result.errors}")
   end
 
   private
@@ -49,10 +40,10 @@ class MyProgram < Thor
     puts pastel.yellow("\nActivity saved to database")
   end
 
-  def list_print(result)
+  def list_print(activities)
     pastel = Pastel.new
     headers = colorized_headers(pastel)
-    rows = result.map { |activity| colorized_rows_from_model(pastel, activity) }
+    rows = activities.map { |activity| colorized_rows_from_model(pastel, activity) }
 
     table = TTY::Table.new headers, rows
     puts table.render(:ascii, padding: [0, 1, 0, 1])
