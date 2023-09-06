@@ -2,9 +2,11 @@
 
 class ApiWrapperController < ApplicationController
   def index
+    return if params[:commit].blank?
+
     result = ApiWrapper::Index::Organizer.call(params_to_validate: index_params)
 
-    if result.success? && index_params.present?
+    if result.success?
       @activity = result.activity
     else
       handle_error(result, :index)
