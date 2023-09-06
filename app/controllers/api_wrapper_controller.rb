@@ -5,23 +5,21 @@ class ApiWrapperController < ApplicationController
     return unless parameters_set?
 
     result = ApiWrapper::Index::Organizer.call(params_to_validate: index_params)
+
     if result.success?
       @activity = result.activity
     else
-      flash.now[:alert] = result.errors
-      render :index, status: result.semantic_status || 400
+      handle_error(result, :index)
     end
   end
 
   def latest_activities
     result = ApiWrapper::LatestActivities::Organizer.call(latest_activities_params:)
-    @pagy, @activities = pagy(result.activities)
 
     if result.success?
       @pagy, @activities = pagy(result.activities)
     else
-      flash.now[:alert] = result.errors
-      render :latest_activities, status: result.semantic_status || 400
+      handle_error(result, :latest_activities)
     end
   end
 
@@ -37,5 +35,10 @@ class ApiWrapperController < ApplicationController
 
   def parameters_set?
     index_params.values.any?(&:present?)
+  end
+
+  def handle_error(result, action)
+    flash.now[:alert] = result.errors
+    render action, status: result.semantic_status || 400
   end
 end
