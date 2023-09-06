@@ -1,5 +1,9 @@
 # README
 
+## Link to deployed app:
+
+[SmallApiWrapper](https://smallapiwraper-production.up.railway.app/)
+
 ## Requirements
 
 Make sure you have the following installed on your system:
