@@ -2,11 +2,9 @@
 
 class ApiWrapperController < ApplicationController
   def index
-    return unless parameters_set?
-
     result = ApiWrapper::Index::Organizer.call(params_to_validate: index_params)
 
-    if result.success?
+    if result.success? && index_params.present?
       @activity = result.activity
     else
       handle_error(result, :index)
@@ -31,10 +29,6 @@ class ApiWrapperController < ApplicationController
 
   def latest_activities_params
     params.permit(:order, :sort)
-  end
-
-  def parameters_set?
-    index_params.values.any?(&:present?)
   end
 
   def handle_error(result, action)
