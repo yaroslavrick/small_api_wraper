@@ -41,8 +41,6 @@
 
 .rubocop_todo.yml
 
-config/database.yml
-
 .env
 .env.development
 coverage
