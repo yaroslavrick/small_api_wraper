@@ -9,11 +9,34 @@ jobs:
       matrix:
         ruby-version: ['3.1.2']
 
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_searcher_test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
-        uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa
+        uses: ruby/setup-ruby@3b116aa9cbf6aabbec4aafd469da2f7bcfaaa3bc
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+      - name: Setup test database
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          cp config/database.yml.github-actions config/database.yml
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
       - run: bundle exec rspec
